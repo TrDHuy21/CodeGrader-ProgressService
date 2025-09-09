@@ -13,7 +13,7 @@ namespace Application.Mapping
 
             CreateMap<Submission, SubmissionIndexDto>().ReverseMap();
 
-            CreateMap<EvaluaCriteriaDto, EvaluationCriteria>().ReverseMap();
+            CreateMap<EvaluationCriteriaDto, EvaluationCriteria>().ReverseMap();
 
             CreateMap<Submission, SubmisstionDetailDto>().ReverseMap();
         }
