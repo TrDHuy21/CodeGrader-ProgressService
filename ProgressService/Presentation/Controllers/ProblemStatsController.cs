@@ -24,7 +24,6 @@ namespace Presentation.Controllers
             return Ok(result);
         }
 
-
         [HttpGet]
         public async Task<IActionResult> GetProblemStats()
         {

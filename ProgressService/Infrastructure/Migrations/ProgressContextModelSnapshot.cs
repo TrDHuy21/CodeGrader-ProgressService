@@ -24,11 +24,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.ProblemStats", b =>
                 {
-                    b.Property<int>("ProblemId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProblemId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AvgPoint")
                         .HasColumnType("int");
@@ -36,14 +36,14 @@ namespace Infrastructure.Migrations
                     b.Property<int>("TotalSubmisstion")
                         .HasColumnType("int");
 
-                    b.HasKey("ProblemId");
+                    b.HasKey("Id");
 
                     b.ToTable("ProblemStats", (string)null);
 
                     b.HasData(
                         new
                         {
-                            ProblemId = 1,
+                            Id = 1,
                             AvgPoint = 9,
                             TotalSubmisstion = 1
                         });
@@ -84,18 +84,18 @@ namespace Infrastructure.Migrations
                             Language = "c sharp",
                             Point = 9,
                             ProblemId = 1,
-                            SubmisstionAt = new DateTime(2025, 9, 8, 15, 4, 57, 369, DateTimeKind.Local).AddTicks(7662),
+                            SubmisstionAt = new DateTime(2025, 9, 9, 15, 52, 14, 463, DateTimeKind.Local).AddTicks(2389),
                             UserId = 2
                         });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserProgress", b =>
                 {
-                    b.Property<int>("UserId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("EasySolved")
                         .HasColumnType("int");
@@ -112,14 +112,14 @@ namespace Infrastructure.Migrations
                     b.Property<int>("TotalSubmisstion")
                         .HasColumnType("int");
 
-                    b.HasKey("UserId");
+                    b.HasKey("Id");
 
                     b.ToTable("UserProgress", (string)null);
 
                     b.HasData(
                         new
                         {
-                            UserId = 1,
+                            Id = 1,
                             EasySolved = 1,
                             HardSolved = 0,
                             MediumSolved = 0,

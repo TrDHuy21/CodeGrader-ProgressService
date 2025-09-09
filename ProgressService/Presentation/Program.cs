@@ -1,5 +1,8 @@
 
-using System.Text;
+using Application.ExternalServices.Interface;
+using Application.ServiceExternal.Implementation;
+using Application.Services.Implementation;
+using Application.Services.Interface;
 using Infrastructure.Contexts;
 using Infrastructure.UnitOfWorks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,8 +10,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using Application.Services.Interface;
-using Application.Services.Implementation;
 
 namespace Presentation
 {
@@ -22,7 +23,7 @@ namespace Presentation
             string connectDbString = builder.Configuration["ConnectionStrings:DefaultConnection"];
             builder.Services.AddDbContext<ProgressContext>(opt =>
                 opt.UseSqlServer(connectDbString)
-                );        
+            );        
 
 
             // Add services to the container.
@@ -30,9 +31,14 @@ namespace Presentation
             builder.Services.AddScoped<IProblemStatsService, ProblemStatsService>();
             builder.Services.AddScoped<ISubmissionService, SubmissionService>();
             builder.Services.AddScoped<IUserProgressService, UserProgressService>();
+            builder.Services.AddScoped<IProblemExternalService, ProblemExternalService>();
 
             //add mapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            // add http client
+            builder.Services.AddHttpClient();
+
 
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddControllers();

@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Dtos.Resquest;
+﻿using Application.Dtos.Resquest;
 using Common.ResultPattern;
+using Domain.Entities;
 
 namespace Application.Services.Interface
 {
     public interface IUserProgressService
     {
-        Task<Result> GetUserProgress(int userId);
-
-        Task<Result> GetUserProgress();
-
-        Task<Result> AddUserProgressAsync(GradedResult gradedResult);
-
-       
+        Task<Result<UserProgress>> GetUserProgress(int userId);
+        Task<Result<List<UserProgress>>> GetUserProgress();
+        Task<Result<GradedResult>> AddUserProgressAsync(GradedResult gradedResult);       
     }
 }

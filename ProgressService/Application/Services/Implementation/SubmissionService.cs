@@ -1,4 +1,5 @@
-﻿using Application.Dtos.SubmisstionDtos;
+﻿using Application.Dtos.Resquest;
+using Application.Dtos.SubmisstionDtos;
 using Application.Services.Interface;
 using AutoMapper;
 using Common.ResultPattern;
@@ -21,15 +22,10 @@ namespace Application.Services.Implementation
           
         }
 
-        public async Task<Result<SubmisstionDetailDto>> AddSubmission(SubmissionAddDto submissionAddDto)
+        public async Task<Result<SubmisstionDetailDto>> AddSubmission(GradedResult gradedResult)
         {
-           var userIdClaim = _httpContextAccessor.HttpContext.User.FindFirst("id")?.Value;
-           var userId = int.Parse(userIdClaim);
 
-            var submisstionEntity = _mapper.Map<Submission>(submissionAddDto);
-            submisstionEntity.SubmisstionAt = DateTime.UtcNow;
-            submisstionEntity.UserId = userId;
-
+            var submisstionEntity = _mapper.Map<Submission>(gradedResult);
             try
             {
                 await _unitOfWork.Submission.AddAsync(submisstionEntity);

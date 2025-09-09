@@ -1,4 +1,5 @@
-﻿using Application.Dtos.SubmisstionDtos;
+﻿using Application.Dtos.Resquest;
+using Application.Dtos.SubmisstionDtos;
 using Application.Services.Implementation;
 using Application.Services.Interface;
 using Microsoft.AspNetCore.Authorization;
@@ -18,16 +19,14 @@ namespace Presentation.Controllers
             this.submisstionService = submisstionService;
         }
 
-        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> AddSubmission(SubmissionAddDto submissionAddDto)
+        public async Task<IActionResult> AddSubmission(GradedResult gradedResult)
         {
-            var result = await submisstionService.AddSubmission(submissionAddDto);
+            var result = await submisstionService.AddSubmission(gradedResult);
             return Ok(result);
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllSubmissions()
         {
             var result = await submisstionService.GetAllSubmission();
@@ -56,7 +55,7 @@ namespace Presentation.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin")]
+
         [HttpDelete("{submissionId}")]
         public async Task<IActionResult> DeleteSubmission(int submissionId)
         {

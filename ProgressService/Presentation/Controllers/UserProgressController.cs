@@ -1,7 +1,5 @@
 ﻿using Application.Dtos.Resquest;
-using Application.Services.Implementation;
 using Application.Services.Interface;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Presentation.Controllers

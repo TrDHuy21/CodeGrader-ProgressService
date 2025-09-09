@@ -15,14 +15,14 @@ namespace Infrastructure.Migrations
                 name: "ProblemStats",
                 columns: table => new
                 {
-                    ProblemId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalSubmisstion = table.Column<int>(type: "int", nullable: false),
                     AvgPoint = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProblemStats", x => x.ProblemId);
+                    table.PrimaryKey("PK_ProblemStats", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,7 +48,7 @@ namespace Infrastructure.Migrations
                 name: "UserProgress",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TotalSubmisstion = table.Column<int>(type: "int", nullable: false),
                     EasySolved = table.Column<int>(type: "int", nullable: false),
@@ -58,22 +58,22 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserProgress", x => x.UserId);
+                    table.PrimaryKey("PK_UserProgress", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
                 table: "ProblemStats",
-                columns: new[] { "ProblemId", "AvgPoint", "TotalSubmisstion" },
+                columns: new[] { "Id", "AvgPoint", "TotalSubmisstion" },
                 values: new object[] { 1, 9, 1 });
 
             migrationBuilder.InsertData(
                 table: "Submission",
                 columns: new[] { "Id", "Language", "Point", "ProblemId", "SubmisstionAt", "UserId", "Algorithm", "CleanCode" },
-                values: new object[] { 1, "c sharp", 9, 1, new DateTime(2025, 9, 8, 15, 4, 57, 369, DateTimeKind.Local).AddTicks(7662), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
+                values: new object[] { 1, "c sharp", 9, 1, new DateTime(2025, 9, 9, 15, 52, 14, 463, DateTimeKind.Local).AddTicks(2389), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
 
             migrationBuilder.InsertData(
                 table: "UserProgress",
-                columns: new[] { "UserId", "EasySolved", "HardSolved", "MediumSolved", "Rank", "TotalSubmisstion" },
+                columns: new[] { "Id", "EasySolved", "HardSolved", "MediumSolved", "Rank", "TotalSubmisstion" },
                 values: new object[] { 1, 1, 0, 0, 900, 1 });
         }
 

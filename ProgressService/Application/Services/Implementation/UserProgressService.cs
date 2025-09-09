@@ -1,24 +1,80 @@
 ﻿using Application.Dtos.Resquest;
+using Application.ExternalServices.Interface;
 using Application.Services.Interface;
 using Common.ResultPattern;
+using Domain.Entities;
+using Infrastructure.UnitOfWorks;
 
 namespace Application.Services.Implementation
 {
     public class UserProgressService : IUserProgressService
     {
-        public async Task<Result> AddUserProgressAsync(GradedResult gradedResult)
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IProblemExternalService _problemExternalService;
+
+        public UserProgressService(IUnitOfWork unitOfWork, IProblemExternalService problemExternalService)
         {
-            return Result.Failure("Not implement");
+            _unitOfWork = unitOfWork;
+            _problemExternalService = problemExternalService;
         }
 
-        public async Task<Result> GetUserProgress()
+        public async Task<Result<GradedResult>> AddUserProgressAsync(GradedResult gradedResult)
         {
-            return Result.Failure("Not implement");
+            var userProgress = await _unitOfWork.UserProgress.GetById(gradedResult.UserId);
+
+            if (!userProgress.IsSuccess || userProgress.Data == null)
+            {
+                return Result<GradedResult>.Failure("User id not found");
+            }          
+
+            var userProgressEntity = userProgress.Data;
+            userProgressEntity.TotalSubmisstion += 1;
+            var problemResult = await _problemExternalService.GetProblemById(gradedResult.ProblemId);
+
+            if (problemResult.Data == null)
+            {
+                return Result<GradedResult>.Failure("Problem not found");
+            }
+
+            switch (problemResult.Data.Level)
+            {
+                case 1: userProgressEntity.EasySolved++; break;
+                case 2: userProgressEntity.MediumSolved++; break;
+                case 3: userProgressEntity.HardSolved++; break;
+            }
+
+            userProgressEntity.Rank =
+                userProgressEntity.EasySolved * 1 +
+                userProgressEntity.MediumSolved * 2 +
+                userProgressEntity.HardSolved * 3;
+
+            try
+            {
+                _unitOfWork.UserProgress.UpdateAsync(userProgressEntity);
+                await _unitOfWork.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return Result<GradedResult>.Failure("Add user progress failed");
+            }
+
+            return Result<GradedResult>.Success("Add user progress successfully", null);
         }
 
-        public async Task<Result> GetUserProgress(int userId)
+        public async Task<Result<UserProgress>> GetUserProgress(int userId)
+            {
+            var result = await _unitOfWork.UserProgress.GetById(userId);
+            if(!result.IsSuccess)
+            {
+                return Result<UserProgress>.Failure("User id not found");
+            }
+            return Result<UserProgress>.Success(result.Data);
+        }
+
+        public async Task<Result<List<UserProgress>>> GetUserProgress()
         {
-            return Result.Failure("Not implement");
+            var result = await _unitOfWork.UserProgress.GetAllAsync();
+            return Result<List<UserProgress>>.Success(result.Data);
         }
     }
 }
