@@ -12,6 +12,6 @@ namespace Application.Dtos.SubmisstionDtos
         public string Language { get; set; }
         public int Point { get; set; }
         public DateTime SubmisstionAt { get; set; }
-        public EvaluaCriteriaDto EvaluaCriteria { get; set; }
+        public EvaluationCriteriaDto EvaluationCriteriaDto { get; set; }
     }
 }
