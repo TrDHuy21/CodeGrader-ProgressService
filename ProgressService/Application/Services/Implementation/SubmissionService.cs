@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Dtos.SubmisstionDtos;
+﻿using Application.Dtos.SubmisstionDtos;
 using Application.Services.Interface;
 using AutoMapper;
 using Common.ResultPattern;
 using Domain.Entities;
 using Infrastructure.UnitOfWorks;
 using Microsoft.AspNetCore.Http;
-using System.Net.Http.Json;
-
 namespace Application.Services.Implementation
 {
-    public class SubmissionService : ISubmisstionService
+    public class SubmissionService : ISubmissionService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IHttpContextAccessor _httpContextAccessor;    

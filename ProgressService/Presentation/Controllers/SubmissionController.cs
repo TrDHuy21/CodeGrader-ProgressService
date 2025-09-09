@@ -1,4 +1,5 @@
 ﻿using Application.Dtos.SubmisstionDtos;
+using Application.Services.Implementation;
 using Application.Services.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -10,9 +11,9 @@ namespace Presentation.Controllers
     [ApiController]
     public class SubmissionController : ControllerBase
     {
-        private readonly ISubmisstionService submisstionService;
+        private readonly ISubmissionService submisstionService;
 
-        public SubmissionController(ISubmisstionService submisstionService)
+        public SubmissionController(ISubmissionService submisstionService)
         {
             this.submisstionService = submisstionService;
         }

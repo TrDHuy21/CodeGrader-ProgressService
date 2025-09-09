@@ -5,7 +5,9 @@ namespace Application.Dtos.SubmisstionDtos
     public class SubmissionIndexDto
     {
         public int Id { get; set; }
-        public int ProblemName { get; set; }
+
+        public int UserId { get; set; }
+        public int ProblemId { get; set; }
         public string Language { get; set; }
         public int Point { get; set; }
         public DateTime SubmisstionAt { get; set; }
