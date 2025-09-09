@@ -1,6 +1,9 @@
 
 using System.Text;
+using Application.Services.Implementation;
+using Application.Services.Interface;
 using Infrastructure.Contexts;
+using Infrastructure.UnitOfWorks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -20,8 +23,15 @@ namespace Presentation
                 opt.UseSqlServer(connectDbString)
                 );
 
-            // Add services to the container.
 
+            // Add services to the container.
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IProblemStatsService, ProblemStatsService>();
+            builder.Services.AddScoped<ISubmissionService, SubmissionService>();
+            builder.Services.AddScoped<IUserProgressService, UserProgressService>();
+
+            //add mapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddControllers();
 
             // add auth author
@@ -33,10 +43,10 @@ namespace Presentation
                     opt.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateAudience = true,
-                        ValidAudience = "MyAudience",
+                        ValidAudience = jwtConfig["Audience"],
 
                         ValidateIssuer = true,
-                        ValidIssuer = "Issuer",
+                        ValidIssuer = jwtConfig["Issuer"],
 
                         //ValidateLifetime = true,
 
