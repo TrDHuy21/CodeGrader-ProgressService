@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Domain.Entities;
 using Infrastructure.Contexts;
 using Infrastructure.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories.Implementation
 {
@@ -18,5 +19,15 @@ namespace Infrastructure.Repositories.Implementation
         {
             _progressContext = context;
         }
+
+        public async Task<List<Submission>> GetByProblemId(int problemId)
+        {
+           return await _progressContext.Submission.Where(s => s.ProblemId == problemId).ToListAsync();
+        }
+
+        public async Task<List<Submission>> GetByUserId(int userId)
+        {
+            return await _progressContext.Submission.Where(s => s.UserId == userId).ToListAsync();
+        }   
     }
 }

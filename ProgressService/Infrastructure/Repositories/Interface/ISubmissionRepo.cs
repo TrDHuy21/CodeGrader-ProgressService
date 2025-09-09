@@ -10,5 +10,7 @@ namespace Infrastructure.Repositories.Interface
 {
     public interface ISubmissionRepo : IGenericRepo<Submission>
     {
+        Task<List<Submission>> GetByUserId(int userId);
+        Task<List<Submission>> GetByProblemId(int problemId);
     }
 }

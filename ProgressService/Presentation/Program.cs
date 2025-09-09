@@ -1,10 +1,12 @@
-
-using System.Text;
+using Application.Services.Implementation;
+using Application.Services.Interface;
 using Infrastructure.Contexts;
+using Infrastructure.UnitOfWorks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 namespace Presentation
 {
@@ -18,11 +20,18 @@ namespace Presentation
             string connectDbString = builder.Configuration["ConnectionStrings:DefaultConnection"];
             builder.Services.AddDbContext<ProgressContext>(opt =>
                 opt.UseSqlServer(connectDbString)
-                );
+                );        
 
-            // Add services to the container.
-
+            // add services
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddTransient<ISubmisstionService,SubmissionService>();
             builder.Services.AddControllers();
+
+            //add mapper
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            // add http context accessor
+            builder.Services.AddHttpContextAccessor();
 
             // add auth author
             var jwtConfig = builder.Configuration.GetSection("JWT");

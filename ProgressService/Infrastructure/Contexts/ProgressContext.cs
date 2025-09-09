@@ -70,8 +70,8 @@ namespace Infrastructure.Contexts
             );
         }
 
-        public DbSet<ProblemStats> ProblemStats;
-        public DbSet<Submission> Submission;
-        public DbSet<UserProgress> UserProgress;
+        public DbSet<ProblemStats> ProblemStats { get; set; }
+        public DbSet<Submission> Submission { get; set; }
+        public DbSet<UserProgress> UserProgress { get; set; }
     }
 }

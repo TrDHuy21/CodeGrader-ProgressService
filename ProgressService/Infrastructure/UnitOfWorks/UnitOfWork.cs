@@ -28,6 +28,11 @@ namespace Infrastructure.UnitOfWorks
         public IUserProgressRepo _userProgressRepo;
         public IUserProgressRepo UserProgress => _userProgressRepo ??= new UserProgressRepo(_progressContext);
 
+        public UnitOfWork(ProgressContext progressContext)
+        {
+            _progressContext = progressContext ?? throw new ArgumentNullException(nameof(progressContext));
+        }
+
         public async Task<Result> BeginTransaction()
         {
             try
