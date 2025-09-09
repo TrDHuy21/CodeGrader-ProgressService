@@ -43,10 +43,10 @@ namespace Application.Services.Implementation
             }
 
              var existingProblemStat = problemStat.Data;
-             existingProblemStat.TotalSubmisstion += 1;
+             existingProblemStat.TotalSubmission += 1;
              existingProblemStat.AvgPoint = 
-                (existingProblemStat.AvgPoint * (existingProblemStat.TotalSubmisstion - 1) + gradedResult.Point) 
-                / existingProblemStat.TotalSubmisstion;
+                (existingProblemStat.AvgPoint * (existingProblemStat.TotalSubmission - 1) + gradedResult.Point) 
+                / existingProblemStat.TotalSubmission;
 
             try
             {

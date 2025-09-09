@@ -28,7 +28,7 @@ namespace Application.Services.Implementation
             }          
 
             var userProgressEntity = userProgress.Data;
-            userProgressEntity.TotalSubmisstion += 1;
+            userProgressEntity.TotalSubmission += 1;
             var problemResult = await _problemExternalService.GetProblemById(gradedResult.ProblemId);
 
             if (problemResult.Data == null)

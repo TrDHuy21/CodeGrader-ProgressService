@@ -34,9 +34,9 @@ namespace Infrastructure.Contexts
                     Id = 1,
                     UserId = 2,
                     ProblemId = 1,
-                    Language = "c sharp",
+                    ProgrammingLanguage = "c sharp",
                     Point = 9,
-                    SubmisstionAt = DateTime.Now,
+                    SubmissionAt = DateTime.Now,
                 }
             );
             modelBuilder.Entity<Submission>().OwnsOne(s => s.EvaluationCriteria).HasData(
@@ -52,7 +52,7 @@ namespace Infrastructure.Contexts
                 new ProblemStats()
                 {
                     Id = 1,
-                    TotalSubmisstion = 1,
+                    TotalSubmission = 1,
                     AvgPoint = 9
                 }
             );
@@ -65,7 +65,7 @@ namespace Infrastructure.Contexts
                     MediumSolved = 0,
                     HardSolved = 0,
                     Rank = 900,
-                    TotalSubmisstion = 1
+                    TotalSubmission = 1
                 }
             );
         }

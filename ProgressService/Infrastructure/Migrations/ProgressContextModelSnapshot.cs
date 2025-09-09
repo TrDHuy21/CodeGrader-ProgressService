@@ -33,7 +33,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("AvgPoint")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalSubmisstion")
+                    b.Property<int>("TotalSubmission")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -45,7 +45,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             AvgPoint = 9,
-                            TotalSubmisstion = 1
+                            TotalSubmission = 1
                         });
                 });
 
@@ -57,17 +57,17 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Point")
                         .HasColumnType("int");
 
                     b.Property<int>("ProblemId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("SubmisstionAt")
+                    b.Property<string>("ProgrammingLanguage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SubmissionAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -81,10 +81,10 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Language = "c sharp",
                             Point = 9,
                             ProblemId = 1,
-                            SubmisstionAt = new DateTime(2025, 9, 9, 15, 52, 14, 463, DateTimeKind.Local).AddTicks(2389),
+                            ProgrammingLanguage = "c sharp",
+                            SubmissionAt = new DateTime(2025, 9, 10, 2, 28, 25, 375, DateTimeKind.Local).AddTicks(7899),
                             UserId = 2
                         });
                 });
@@ -109,7 +109,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Rank")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalSubmisstion")
+                    b.Property<int>("TotalSubmission")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -124,7 +124,7 @@ namespace Infrastructure.Migrations
                             HardSolved = 0,
                             MediumSolved = 0,
                             Rank = 900,
-                            TotalSubmisstion = 1
+                            TotalSubmission = 1
                         });
                 });
 

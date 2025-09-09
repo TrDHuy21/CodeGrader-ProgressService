@@ -17,7 +17,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalSubmisstion = table.Column<int>(type: "int", nullable: false),
+                    TotalSubmission = table.Column<int>(type: "int", nullable: false),
                     AvgPoint = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -33,9 +33,9 @@ namespace Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     ProblemId = table.Column<int>(type: "int", nullable: false),
-                    Language = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProgrammingLanguage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Point = table.Column<int>(type: "int", nullable: false),
-                    SubmisstionAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SubmissionAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Algorithm = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CleanCode = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
@@ -50,7 +50,7 @@ namespace Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TotalSubmisstion = table.Column<int>(type: "int", nullable: false),
+                    TotalSubmission = table.Column<int>(type: "int", nullable: false),
                     EasySolved = table.Column<int>(type: "int", nullable: false),
                     MediumSolved = table.Column<int>(type: "int", nullable: false),
                     HardSolved = table.Column<int>(type: "int", nullable: false),
@@ -63,17 +63,17 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "ProblemStats",
-                columns: new[] { "Id", "AvgPoint", "TotalSubmisstion" },
+                columns: new[] { "Id", "AvgPoint", "TotalSubmission" },
                 values: new object[] { 1, 9, 1 });
 
             migrationBuilder.InsertData(
                 table: "Submission",
-                columns: new[] { "Id", "Language", "Point", "ProblemId", "SubmisstionAt", "UserId", "Algorithm", "CleanCode" },
-                values: new object[] { 1, "c sharp", 9, 1, new DateTime(2025, 9, 9, 15, 52, 14, 463, DateTimeKind.Local).AddTicks(2389), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
+                columns: new[] { "Id", "Point", "ProblemId", "ProgrammingLanguage", "SubmissionAt", "UserId", "Algorithm", "CleanCode" },
+                values: new object[] { 1, 9, 1, "c sharp", new DateTime(2025, 9, 10, 2, 28, 25, 375, DateTimeKind.Local).AddTicks(7899), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
 
             migrationBuilder.InsertData(
                 table: "UserProgress",
-                columns: new[] { "Id", "EasySolved", "HardSolved", "MediumSolved", "Rank", "TotalSubmisstion" },
+                columns: new[] { "Id", "EasySolved", "HardSolved", "MediumSolved", "Rank", "TotalSubmission" },
                 values: new object[] { 1, 1, 0, 0, 900, 1 });
         }
 
