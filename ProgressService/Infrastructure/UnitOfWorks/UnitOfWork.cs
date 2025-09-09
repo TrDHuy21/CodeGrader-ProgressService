@@ -18,6 +18,11 @@ namespace Infrastructure.UnitOfWorks
         protected readonly ProgressContext _progressContext;
         private IDbContextTransaction? _transaction;
 
+        public UnitOfWork(ProgressContext progressContext)
+        {
+            _progressContext = progressContext;
+        }
+
         public IProblemStatsRepo _problemStatsRepo;
         public IProblemStatsRepo ProblemStats => _problemStatsRepo ??= new ProblemStatsRepo(_progressContext);
 
@@ -28,10 +33,6 @@ namespace Infrastructure.UnitOfWorks
         public IUserProgressRepo _userProgressRepo;
         public IUserProgressRepo UserProgress => _userProgressRepo ??= new UserProgressRepo(_progressContext);
 
-        public UnitOfWork(ProgressContext progressContext)
-        {
-            _progressContext = progressContext ?? throw new ArgumentNullException(nameof(progressContext));
-        }
 
         public async Task<Result> BeginTransaction()
         {

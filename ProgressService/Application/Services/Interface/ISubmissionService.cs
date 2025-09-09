@@ -8,7 +8,7 @@ using Common.ResultPattern;
 
 namespace Application.Services.Interface
 {
-    public interface ISubmisstionService
+    public interface ISubmissionService
     {
         public Task<Result<SubmisstionDetailDto>> GetSubmisstion(int submissionId);
         public Task<Result<List<SubmissionIndexDto>>> GetSubmisstionsByUserId();

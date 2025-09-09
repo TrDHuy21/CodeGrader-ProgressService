@@ -1,5 +1,5 @@
-using Application.Services.Implementation;
-using Application.Services.Interface;
+
+using System.Text;
 using Infrastructure.Contexts;
 using Infrastructure.UnitOfWorks;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Application.Services.Interface;
+using Application.Services.Implementation;
 
 namespace Presentation
 {
@@ -22,16 +24,18 @@ namespace Presentation
                 opt.UseSqlServer(connectDbString)
                 );        
 
-            // add services
+
+            // Add services to the container.
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddTransient<ISubmisstionService,SubmissionService>();
-            builder.Services.AddControllers();
+            builder.Services.AddScoped<IProblemStatsService, ProblemStatsService>();
+            builder.Services.AddScoped<ISubmissionService, SubmissionService>();
+            builder.Services.AddScoped<IUserProgressService, UserProgressService>();
 
             //add mapper
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            // add http context accessor
             builder.Services.AddHttpContextAccessor();
+            builder.Services.AddControllers();
 
             // add auth author
             var jwtConfig = builder.Configuration.GetSection("JWT");
@@ -42,10 +46,10 @@ namespace Presentation
                     opt.TokenValidationParameters = new TokenValidationParameters()
                     {
                         ValidateAudience = true,
-                        ValidAudience = "MyAudience",
+                        ValidAudience = jwtConfig["Audience"],
 
                         ValidateIssuer = true,
-                        ValidIssuer = "Issuer",
+                        ValidIssuer = jwtConfig["Issuer"],
 
                         //ValidateLifetime = true,
 

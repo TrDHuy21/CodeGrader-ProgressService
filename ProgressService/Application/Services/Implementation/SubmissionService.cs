@@ -1,4 +1,9 @@
-﻿using Application.Dtos.SubmisstionDtos;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Application.Dtos.SubmisstionDtos;
 using Application.Services.Interface;
 using AutoMapper;
 using Common.ResultPattern;
@@ -49,7 +54,7 @@ namespace Application.Services.Implementation
         {
             var submmissionExists =  _unitOfWork.Submission.GetById(submissionId).Result.Data;
             if (submmissionExists == null)
-            {
+    {
                 return Result<string>.Failure("Submission not found");
             }
             _unitOfWork.Submission.Remove(submmissionExists);
@@ -64,22 +69,22 @@ namespace Application.Services.Implementation
             var resultDto = _mapper.Map<List<SubmisstionDetailDto>>(result.Data);
         
             return Result<List<SubmisstionDetailDto>>.Success("Get all Submisstion successfully", resultDto);
-        }  
+        }
 
         public async Task<Result<SubmisstionDetailDto>> GetSubmisstion(int submissionId)
         {
             var submmissionExists = await _unitOfWork.Submission.GetById(submissionId);   
 
             if (submmissionExists == null)
-            {
+        {
                 return Result<SubmisstionDetailDto>.Failure("Submission not found");
-            }
+        }
 
             return Result<SubmisstionDetailDto>.Success("Get submission successfully", _mapper.Map<SubmisstionDetailDto>(submmissionExists.Data));                  
         }
 
         public async Task<Result<List<SubmissionIndexDto>>> GetSubmisstionsByProblemId(int ProblemId)
-        {    
+        {
       
             var result = await _unitOfWork.Submission.GetByProblemId(ProblemId);     
 
