@@ -29,7 +29,7 @@ namespace Application.Services.Implementation
                 var newUserProgress = new UserProgress
                 {
                     Id = gradedResult.UserId,
-                    TotalSubmisstion = 1,
+                    TotalSubmission = 1,
                     EasySolved = 0,
                     MediumSolved = 0,
                     HardSolved = 0,
@@ -53,7 +53,7 @@ namespace Application.Services.Implementation
                 return Result<GradedResult>.Success("Add user progress successfully", null);
             }          
       
-            userProgressEntity.TotalSubmisstion += 1;
+            userProgressEntity.TotalSubmission += 1;
            
 
             if (problemResult.Data == null)

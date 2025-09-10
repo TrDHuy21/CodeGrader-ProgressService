@@ -43,7 +43,7 @@ namespace Application.Services.Implementation
                await _unitOfWork.ProblemStats.AddAsync( new ProblemStats
                {
                    Id = gradedResult.ProblemId,
-                   TotalSubmisstion = 1,
+                   TotalSubmission = 1,
                    AvgPoint = gradedResult.Point
                });
                 await _unitOfWork.SaveChangesAsync();    
@@ -51,10 +51,10 @@ namespace Application.Services.Implementation
             }
 
              var existingProblemStat = problemStat.Data;
-             existingProblemStat.TotalSubmisstion += 1;
+             existingProblemStat.TotalSubmission += 1;
              existingProblemStat.AvgPoint = 
-                (existingProblemStat.AvgPoint * (existingProblemStat.TotalSubmisstion - 1) + gradedResult.Point) 
-                / existingProblemStat.TotalSubmisstion;
+                (existingProblemStat.AvgPoint * (existingProblemStat.TotalSubmission - 1) + gradedResult.Point) 
+                / existingProblemStat.TotalSubmission;
 
             try
             {

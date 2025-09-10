@@ -30,7 +30,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("AvgPoint")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalSubmisstion")
+                    b.Property<int>("TotalSubmission")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -42,13 +42,7 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             AvgPoint = 9,
-                            TotalSubmisstion = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AvgPoint = 3,
-                            TotalSubmisstion = 1
+                            TotalSubmission = 1
                         });
                 });
 
@@ -60,17 +54,17 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Language")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Point")
                         .HasColumnType("int");
 
                     b.Property<int>("ProblemId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("SubmisstionAt")
+                    b.Property<string>("ProgrammingLanguage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("SubmissionAt")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("UserId")
@@ -84,10 +78,10 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Language = "c sharp",
                             Point = 9,
                             ProblemId = 1,
-                            SubmisstionAt = new DateTime(2025, 9, 10, 9, 45, 48, 800, DateTimeKind.Local).AddTicks(4378),
+                            ProgrammingLanguage = "c sharp",
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 12, 47, 538, DateTimeKind.Local).AddTicks(5051),
                             UserId = 2
                         });
                 });
@@ -109,7 +103,7 @@ namespace Infrastructure.Migrations
                     b.Property<int>("Rank")
                         .HasColumnType("int");
 
-                    b.Property<int>("TotalSubmisstion")
+                    b.Property<int>("TotalSubmission")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -124,16 +118,7 @@ namespace Infrastructure.Migrations
                             HardSolved = 0,
                             MediumSolved = 0,
                             Rank = 900,
-                            TotalSubmisstion = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            EasySolved = 1,
-                            HardSolved = 0,
-                            MediumSolved = 0,
-                            Rank = 1,
-                            TotalSubmisstion = 1
+                            TotalSubmission = 1
                         });
                 });
 
@@ -165,12 +150,6 @@ namespace Infrastructure.Migrations
                                 new
                                 {
                                     SubmissionId = 1,
-                                    Algorithm = "Algorithm is correct and efficient for the given task. No issues detected.",
-                                    CleanCode = "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity."
-                                },
-                                new
-                                {
-                                    SubmissionId = 2,
                                     Algorithm = "Algorithm is correct and efficient for the given task. No issues detected.",
                                     CleanCode = "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity."
                                 });

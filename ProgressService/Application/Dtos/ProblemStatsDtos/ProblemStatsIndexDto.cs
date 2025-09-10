@@ -9,7 +9,7 @@ namespace Application.Dtos.ProblemStatsDtos
     public class ProblemStatsIndexDto
     {
         public int Id { get; set; }
-        public int TotalSubmisstion { get; set; }
+        public int TotalSubmission { get; set; }
         public int AvgPoint { get; set; }
     }
 }
