@@ -12,6 +12,7 @@ namespace Application.Services.Implementation
         private readonly IUnitOfWork _unitOfWork;
         private readonly IProblemExternalService _problemExternalService;
 
+
         public UserProgressService(IUnitOfWork unitOfWork, IProblemExternalService problemExternalService)
         {
             _unitOfWork = unitOfWork;
@@ -20,13 +21,21 @@ namespace Application.Services.Implementation
 
         public async Task<Result<GradedResult>> AddUserProgressAsync(GradedResult gradedResult)
         {
-            var userProgress = await _unitOfWork.UserProgress.GetById(gradedResult.UserId);
-            var problemResult = await _problemExternalService.GetProblemById(gradedResult.ProblemId);
-            var userProgressEntity = userProgress.Data;
+            // Lấy UserProgress hiện tại
+            var userProgressResult = await _unitOfWork.UserProgress.GetById(gradedResult.UserId);
+            UserProgress userProgressEntity = userProgressResult.Data;
 
-            if (!userProgress.IsSuccess || userProgress.Data == null)
+            // Lấy thông tin bài từ service
+            var problemResult = await _problemExternalService.GetProblemById(gradedResult.ProblemId);
+            if (problemResult.Data == null)
+                return Result<GradedResult>.Failure("Problem not found");
+
+            int level = problemResult.Data.Level; // Level bài hiện tại
+
+            // Nếu UserProgress chưa có → tạo mới
+            if (!userProgressResult.IsSuccess || userProgressEntity == null)
             {
-                var newUserProgress = new UserProgress
+                userProgressEntity = new UserProgress
                 {
                     Id = gradedResult.UserId,
                     TotalSubmission = 1,
@@ -34,48 +43,38 @@ namespace Application.Services.Implementation
                     MediumSolved = 0,
                     HardSolved = 0,
                     Rank = 0
-
                 };
-                switch (problemResult.Data.Level)
-                {
-                    case 1: newUserProgress.EasySolved++; break;
-                    case 2: newUserProgress.MediumSolved++; break;
-                    case 3: newUserProgress.HardSolved++; break;
-                }
-
-                newUserProgress.Rank =
-                    newUserProgress.EasySolved * 1 +
-                    newUserProgress.MediumSolved * 2 +
-                    newUserProgress.HardSolved * 3;
-
-                await _unitOfWork.UserProgress.AddAsync(newUserProgress);
-                await _unitOfWork.SaveChangesAsync();
-                return Result<GradedResult>.Success("Add user progress successfully", null);
-            }          
-      
-            userProgressEntity.TotalSubmission += 1;
-           
-
-            if (problemResult.Data == null)
+            }
+            else
             {
-                return Result<GradedResult>.Failure("Problem not found");
+                userProgressEntity.TotalSubmission++;
             }
 
-            switch (problemResult.Data.Level)
+            // Cập nhật số bài và Rank theo point bài vừa submit
+            switch (level)
             {
-                case 1: userProgressEntity.EasySolved++; break;
-                case 2: userProgressEntity.MediumSolved++; break;
-                case 3: userProgressEntity.HardSolved++; break;
+                case 1:
+                    userProgressEntity.EasySolved++;
+                    userProgressEntity.Rank += gradedResult.Point * 1;
+                    break;
+                case 2:
+                    userProgressEntity.MediumSolved++;
+                    userProgressEntity.Rank += gradedResult.Point * 2;
+                    break;
+                case 3:
+                    userProgressEntity.HardSolved++;
+                    userProgressEntity.Rank += gradedResult.Point * 3;
+                    break;
             }
 
-            userProgressEntity.Rank =
-                userProgressEntity.EasySolved * 1 +
-                userProgressEntity.MediumSolved * 2 +
-                userProgressEntity.HardSolved * 3;
-
+            // Lưu UserProgress
             try
             {
-                _unitOfWork.UserProgress.UpdateAsync(userProgressEntity);
+                if (!userProgressResult.IsSuccess || userProgressEntity == null)
+                    await _unitOfWork.UserProgress.AddAsync(userProgressEntity);
+                else
+                     _unitOfWork.UserProgress.UpdateAsync(userProgressEntity);
+
                 await _unitOfWork.SaveChangesAsync();
             }
             catch (Exception)
@@ -85,6 +84,8 @@ namespace Application.Services.Implementation
 
             return Result<GradedResult>.Success("Add user progress successfully", null);
         }
+
+
 
         public async Task<Result<UserProgress>> GetUserProgress(int userId)
             {

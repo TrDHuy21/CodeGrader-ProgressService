@@ -41,7 +41,13 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            AvgPoint = 9,
+                            AvgPoint = 10,
+                            TotalSubmission = 4
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvgPoint = 7,
                             TotalSubmission = 1
                         });
                 });
@@ -81,7 +87,43 @@ namespace Infrastructure.Migrations
                             Point = 9,
                             ProblemId = 1,
                             ProgrammingLanguage = "c sharp",
-                            SubmissionAt = new DateTime(2025, 9, 10, 10, 24, 22, 310, DateTimeKind.Local).AddTicks(3347),
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(582),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Point = 8,
+                            ProblemId = 1,
+                            ProgrammingLanguage = "java",
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(595),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Point = 7,
+                            ProblemId = 2,
+                            ProgrammingLanguage = "python",
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(637),
+                            UserId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Point = 6,
+                            ProblemId = 1,
+                            ProgrammingLanguage = "c++",
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(638),
+                            UserId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Point = 5,
+                            ProblemId = 1,
+                            ProgrammingLanguage = "c++",
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(639),
                             UserId = 2
                         });
                 });
@@ -114,11 +156,20 @@ namespace Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            EasySolved = 1,
+                            EasySolved = 2,
                             HardSolved = 0,
                             MediumSolved = 0,
                             Rank = 900,
-                            TotalSubmission = 1
+                            TotalSubmission = 2
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EasySolved = 2,
+                            HardSolved = 0,
+                            MediumSolved = 1,
+                            Rank = 700,
+                            TotalSubmission = 3
                         });
                 });
 
@@ -150,8 +201,32 @@ namespace Infrastructure.Migrations
                                 new
                                 {
                                     SubmissionId = 1,
-                                    Algorithm = "Algorithm is correct and efficient for the given task. No issues detected.",
-                                    CleanCode = "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity."
+                                    Algorithm = "Correct & efficient",
+                                    CleanCode = "Readable, basic C# conventions, could use comments"
+                                },
+                                new
+                                {
+                                    SubmissionId = 2,
+                                    Algorithm = "Correct but could be optimized",
+                                    CleanCode = "Generally clean, some inconsistent naming"
+                                },
+                                new
+                                {
+                                    SubmissionId = 3,
+                                    Algorithm = "Minor flaws, edge cases",
+                                    CleanCode = "Somewhat messy, poor indentation"
+                                },
+                                new
+                                {
+                                    SubmissionId = 4,
+                                    Algorithm = "Inefficient, large inputs",
+                                    CleanCode = "Difficult to read, poor variable names, no comments"
+                                },
+                                new
+                                {
+                                    SubmissionId = 5,
+                                    Algorithm = "Incorrect, doesn't solve problem",
+                                    CleanCode = "Very messy, unstructured, hard to follow"
                                 });
                         });
 

@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -62,17 +64,32 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "ProblemStats",
                 columns: new[] { "Id", "AvgPoint", "TotalSubmission" },
-                values: new object[] { 1, 9, 1 });
+                values: new object[,]
+                {
+                    { 1, 10, 4 },
+                    { 2, 7, 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Submission",
                 columns: new[] { "Id", "Point", "ProblemId", "ProgrammingLanguage", "SubmissionAt", "UserId", "Algorithm", "CleanCode" },
-                values: new object[] { 1, 9, 1, "c sharp", new DateTime(2025, 9, 10, 10, 24, 22, 310, DateTimeKind.Local).AddTicks(3347), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
+                values: new object[,]
+                {
+                    { 1, 9, 1, "c sharp", new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(582), 2, "Correct & efficient", "Readable, basic C# conventions, could use comments" },
+                    { 2, 8, 1, "java", new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(595), 1, "Correct but could be optimized", "Generally clean, some inconsistent naming" },
+                    { 3, 7, 2, "python", new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(637), 2, "Minor flaws, edge cases", "Somewhat messy, poor indentation" },
+                    { 4, 6, 1, "c++", new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(638), 1, "Inefficient, large inputs", "Difficult to read, poor variable names, no comments" },
+                    { 5, 5, 1, "c++", new DateTime(2025, 9, 10, 10, 52, 40, 861, DateTimeKind.Local).AddTicks(639), 2, "Incorrect, doesn't solve problem", "Very messy, unstructured, hard to follow" }
+                });
 
             migrationBuilder.InsertData(
                 table: "UserProgress",
                 columns: new[] { "Id", "EasySolved", "HardSolved", "MediumSolved", "Rank", "TotalSubmission" },
-                values: new object[] { 1, 1, 0, 0, 900, 1 });
+                values: new object[,]
+                {
+                    { 1, 2, 0, 0, 900, 2 },
+                    { 2, 2, 0, 1, 700, 3 }
+                });
         }
 
         /// <inheritdoc />

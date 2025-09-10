@@ -37,35 +37,85 @@ namespace Infrastructure.Contexts
                     ProgrammingLanguage = "c sharp",
                     Point = 9,
                     SubmissionAt = DateTime.Now,
+                },
+                new Submission()
+                {
+                    Id = 2,
+                    UserId = 1,
+                    ProblemId = 1,
+                    ProgrammingLanguage = "java",
+                    Point = 8,
+                    SubmissionAt = DateTime.Now,
+                },
+                new Submission()
+                {
+                    Id = 3,
+                    UserId = 2,
+                    ProblemId = 2,
+                    ProgrammingLanguage = "python",
+                    Point = 7,
+                    SubmissionAt = DateTime.Now,
+                },
+                new Submission()
+                {
+                    Id = 4,
+                    UserId = 1,
+                    ProblemId = 1,
+                    ProgrammingLanguage = "c++",
+                    Point = 6,
+                    SubmissionAt = DateTime.Now,
+                },
+                new Submission()
+                {
+                    Id = 5,
+                    UserId = 2,
+                    ProblemId = 1,
+                    ProgrammingLanguage = "c++",
+                    Point = 5,
+                    SubmissionAt = DateTime.Now,
                 }
             );
             modelBuilder.Entity<Submission>().OwnsOne(s => s.EvaluationCriteria).HasData(
-                new
-                {
-                    SubmissionId = 1, // Foreign key tới Submission
-                    Algorithm = "Algorithm is correct and efficient for the given task. No issues detected.",
-                    CleanCode = "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity."
-                }
+                new  { SubmissionId = 1, Algorithm = "Correct & efficient", CleanCode = "Readable, basic C# conventions, could use comments" },
+                new  { SubmissionId = 2, Algorithm = "Correct but could be optimized", CleanCode = "Generally clean, some inconsistent naming" },
+                new  { SubmissionId = 3, Algorithm = "Minor flaws, edge cases", CleanCode = "Somewhat messy, poor indentation" },
+                new  { SubmissionId = 4, Algorithm = "Inefficient, large inputs", CleanCode = "Difficult to read, poor variable names, no comments" },
+                new  { SubmissionId = 5, Algorithm = "Incorrect, doesn't solve problem", CleanCode = "Very messy, unstructured, hard to follow" }
              );
 
             modelBuilder.Entity<ProblemStats>().HasData(
                 new ProblemStats()
                 {
                     Id = 1,
+                    TotalSubmission = 4,
+                    AvgPoint = 10
+                },
+                new ProblemStats()
+                {
+                    Id = 2,
                     TotalSubmission = 1,
-                    AvgPoint = 9
-                }
+                    AvgPoint = 7
+                }          
             );
 
             modelBuilder.Entity<UserProgress>().HasData(
                 new UserProgress()
                 {
                     Id = 1,
-                    EasySolved = 1,
+                    EasySolved = 2,
                     MediumSolved = 0,
                     HardSolved = 0,
                     Rank = 900,
-                    TotalSubmission = 1
+                    TotalSubmission = 2
+                },
+                new UserProgress()
+                {
+                    Id = 2,
+                    EasySolved = 2,
+                    MediumSolved = 1,
+                    HardSolved = 0,
+                    Rank = 700,
+                    TotalSubmission = 3
                 }
             );
         }

@@ -24,7 +24,6 @@ namespace Application.Services.Implementation
 
         public async Task<Result<SubmisstionDetailDto>> AddSubmission(GradedResult gradedResult)
         {
-
             var submisstionEntity = _mapper.Map<Submission>(gradedResult);
             try
             {
