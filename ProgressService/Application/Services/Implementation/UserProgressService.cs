@@ -21,15 +21,40 @@ namespace Application.Services.Implementation
         public async Task<Result<GradedResult>> AddUserProgressAsync(GradedResult gradedResult)
         {
             var userProgress = await _unitOfWork.UserProgress.GetById(gradedResult.UserId);
+            var problemResult = await _problemExternalService.GetProblemById(gradedResult.ProblemId);
+            var userProgressEntity = userProgress.Data;
 
             if (!userProgress.IsSuccess || userProgress.Data == null)
             {
-                return Result<GradedResult>.Failure("User id not found");
-            }          
+                var newUserProgress = new UserProgress
+                {
+                    Id = gradedResult.UserId,
+                    TotalSubmission = 1,
+                    EasySolved = 0,
+                    MediumSolved = 0,
+                    HardSolved = 0,
+                    Rank = 0
 
-            var userProgressEntity = userProgress.Data;
+                };
+                switch (problemResult.Data.Level)
+                {
+                    case 1: newUserProgress.EasySolved++; break;
+                    case 2: newUserProgress.MediumSolved++; break;
+                    case 3: newUserProgress.HardSolved++; break;
+                }
+
+                newUserProgress.Rank =
+                    newUserProgress.EasySolved * 1 +
+                    newUserProgress.MediumSolved * 2 +
+                    newUserProgress.HardSolved * 3;
+
+                await _unitOfWork.UserProgress.AddAsync(newUserProgress);
+                await _unitOfWork.SaveChangesAsync();
+                return Result<GradedResult>.Success("Add user progress successfully", null);
+            }          
+      
             userProgressEntity.TotalSubmission += 1;
-            var problemResult = await _problemExternalService.GetProblemById(gradedResult.ProblemId);
+           
 
             if (problemResult.Data == null)
             {

@@ -3,6 +3,7 @@ using Application.Dtos.Resquest;
 using Application.Services.Interface;
 using AutoMapper;
 using Common.ResultPattern;
+using Domain.Entities;
 using Infrastructure.UnitOfWorks;
 
 namespace Application.Services.Implementation
@@ -39,7 +40,14 @@ namespace Application.Services.Implementation
             var problemStat = await _unitOfWork.ProblemStats.GetById(gradedResult.ProblemId);
             if (!problemStat.IsSuccess || problemStat.Data == null)
             {
-                return Result.Failure("Problem id not found");
+               await _unitOfWork.ProblemStats.AddAsync( new ProblemStats
+               {
+                   Id = gradedResult.ProblemId,
+                   TotalSubmission = 1,
+                   AvgPoint = gradedResult.Point
+               });
+                await _unitOfWork.SaveChangesAsync();    
+                return Result.Success("Add problem stat successfully");
             }
 
              var existingProblemStat = problemStat.Data;

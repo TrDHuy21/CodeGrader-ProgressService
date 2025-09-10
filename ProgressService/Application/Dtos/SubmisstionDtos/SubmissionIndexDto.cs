@@ -9,6 +9,6 @@ namespace Application.Dtos.SubmisstionDtos
         public int ProblemId { get; set; }
         public string ProgrammingLanguage { get; set; }
         public int Point { get; set; }
-        public DateTime SubmisstionAt { get; set; }
+        public DateTime SubmissionAt { get; set; }
     }
 }

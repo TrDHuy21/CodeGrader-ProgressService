@@ -12,7 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ProgressContext))]
+<<<<<<<< HEAD:ProgressService/Infrastructure/Migrations/20250909192826_init.Designer.cs
     [Migration("20250909192826_init")]
+========
+    [Migration("20250910031248_init")]
+>>>>>>>> implementProcessService:ProgressService/Infrastructure/Migrations/20250910031248_init.Designer.cs
     partial class init
     {
         /// <inheritdoc />
@@ -28,10 +32,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.ProblemStats", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AvgPoint")
                         .HasColumnType("int");
@@ -87,7 +88,11 @@ namespace Infrastructure.Migrations
                             Point = 9,
                             ProblemId = 1,
                             ProgrammingLanguage = "c sharp",
+<<<<<<<< HEAD:ProgressService/Infrastructure/Migrations/20250909192826_init.Designer.cs
                             SubmissionAt = new DateTime(2025, 9, 10, 2, 28, 25, 375, DateTimeKind.Local).AddTicks(7899),
+========
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 12, 47, 538, DateTimeKind.Local).AddTicks(5051),
+>>>>>>>> implementProcessService:ProgressService/Infrastructure/Migrations/20250910031248_init.Designer.cs
                             UserId = 2
                         });
                 });
@@ -95,10 +100,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.UserProgress", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("EasySolved")
                         .HasColumnType("int");

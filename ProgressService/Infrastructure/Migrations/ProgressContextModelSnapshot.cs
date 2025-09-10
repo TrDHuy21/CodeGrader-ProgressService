@@ -25,10 +25,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.ProblemStats", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AvgPoint")
                         .HasColumnType("int");
@@ -84,7 +81,7 @@ namespace Infrastructure.Migrations
                             Point = 9,
                             ProblemId = 1,
                             ProgrammingLanguage = "c sharp",
-                            SubmissionAt = new DateTime(2025, 9, 10, 2, 28, 25, 375, DateTimeKind.Local).AddTicks(7899),
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 12, 47, 538, DateTimeKind.Local).AddTicks(5051),
                             UserId = 2
                         });
                 });
@@ -92,10 +89,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.UserProgress", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("EasySolved")
                         .HasColumnType("int");
