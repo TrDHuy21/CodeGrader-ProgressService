@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ProgressContext))]
-    [Migration("20250909085215_init")]
+    [Migration("20250910024549_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -28,10 +28,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.ProblemStats", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("AvgPoint")
                         .HasColumnType("int");
@@ -48,6 +45,12 @@ namespace Infrastructure.Migrations
                         {
                             Id = 1,
                             AvgPoint = 9,
+                            TotalSubmisstion = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AvgPoint = 3,
                             TotalSubmisstion = 1
                         });
                 });
@@ -87,7 +90,7 @@ namespace Infrastructure.Migrations
                             Language = "c sharp",
                             Point = 9,
                             ProblemId = 1,
-                            SubmisstionAt = new DateTime(2025, 9, 9, 15, 52, 14, 463, DateTimeKind.Local).AddTicks(2389),
+                            SubmisstionAt = new DateTime(2025, 9, 10, 9, 45, 48, 800, DateTimeKind.Local).AddTicks(4378),
                             UserId = 2
                         });
                 });
@@ -95,10 +98,7 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.UserProgress", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("EasySolved")
                         .HasColumnType("int");
@@ -127,6 +127,15 @@ namespace Infrastructure.Migrations
                             HardSolved = 0,
                             MediumSolved = 0,
                             Rank = 900,
+                            TotalSubmisstion = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            EasySolved = 1,
+                            HardSolved = 0,
+                            MediumSolved = 0,
+                            Rank = 1,
                             TotalSubmisstion = 1
                         });
                 });
@@ -159,6 +168,12 @@ namespace Infrastructure.Migrations
                                 new
                                 {
                                     SubmissionId = 1,
+                                    Algorithm = "Algorithm is correct and efficient for the given task. No issues detected.",
+                                    CleanCode = "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity."
+                                },
+                                new
+                                {
+                                    SubmissionId = 2,
                                     Algorithm = "Algorithm is correct and efficient for the given task. No issues detected.",
                                     CleanCode = "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity."
                                 });

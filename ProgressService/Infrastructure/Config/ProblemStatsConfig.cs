@@ -19,7 +19,7 @@ namespace Infrastructure.Config
         {
             builder.ToTable(nameof(ProblemStats));
             builder.HasKey(x => x.Id);
-
+            builder.Property(x => x.Id).ValueGeneratedNever();
         }
     }
 }

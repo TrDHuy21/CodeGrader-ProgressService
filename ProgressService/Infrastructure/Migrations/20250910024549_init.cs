@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -15,8 +17,7 @@ namespace Infrastructure.Migrations
                 name: "ProblemStats",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     TotalSubmisstion = table.Column<int>(type: "int", nullable: false),
                     AvgPoint = table.Column<int>(type: "int", nullable: false)
                 },
@@ -48,8 +49,7 @@ namespace Infrastructure.Migrations
                 name: "UserProgress",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     TotalSubmisstion = table.Column<int>(type: "int", nullable: false),
                     EasySolved = table.Column<int>(type: "int", nullable: false),
                     MediumSolved = table.Column<int>(type: "int", nullable: false),
@@ -64,17 +64,30 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "ProblemStats",
                 columns: new[] { "Id", "AvgPoint", "TotalSubmisstion" },
-                values: new object[] { 1, 9, 1 });
+                values: new object[,]
+                {
+                    { 1, 9, 1 },
+                    { 2, 3, 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Submission",
                 columns: new[] { "Id", "Language", "Point", "ProblemId", "SubmisstionAt", "UserId", "Algorithm", "CleanCode" },
-                values: new object[] { 1, "c sharp", 9, 1, new DateTime(2025, 9, 9, 15, 52, 14, 463, DateTimeKind.Local).AddTicks(2389), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
+                values: new object[] { 1, "c sharp", 9, 1, new DateTime(2025, 9, 10, 9, 45, 48, 800, DateTimeKind.Local).AddTicks(4378), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
+
+            migrationBuilder.InsertData(
+                table: "Submission",
+                columns: new[] { "Id", "Algorithm", "CleanCode" },
+                values: new object[] { 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
 
             migrationBuilder.InsertData(
                 table: "UserProgress",
                 columns: new[] { "Id", "EasySolved", "HardSolved", "MediumSolved", "Rank", "TotalSubmisstion" },
-                values: new object[] { 1, 1, 0, 0, 900, 1 });
+                values: new object[,]
+                {
+                    { 1, 1, 0, 0, 900, 1 },
+                    { 2, 1, 0, 0, 1, 1 }
+                });
         }
 
         /// <inheritdoc />
