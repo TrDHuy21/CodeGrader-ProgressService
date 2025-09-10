@@ -15,12 +15,7 @@ namespace Infrastructure.Migrations
                 name: "ProblemStats",
                 columns: table => new
                 {
-<<<<<<<< HEAD:ProgressService/Infrastructure/Migrations/20250909192826_init.cs
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-========
                     Id = table.Column<int>(type: "int", nullable: false),
->>>>>>>> implementProcessService:ProgressService/Infrastructure/Migrations/20250910031248_init.cs
                     TotalSubmission = table.Column<int>(type: "int", nullable: false),
                     AvgPoint = table.Column<int>(type: "int", nullable: false)
                 },
@@ -52,12 +47,7 @@ namespace Infrastructure.Migrations
                 name: "UserProgress",
                 columns: table => new
                 {
-<<<<<<<< HEAD:ProgressService/Infrastructure/Migrations/20250909192826_init.cs
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-========
                     Id = table.Column<int>(type: "int", nullable: false),
->>>>>>>> implementProcessService:ProgressService/Infrastructure/Migrations/20250910031248_init.cs
                     TotalSubmission = table.Column<int>(type: "int", nullable: false),
                     EasySolved = table.Column<int>(type: "int", nullable: false),
                     MediumSolved = table.Column<int>(type: "int", nullable: false),
@@ -77,11 +67,7 @@ namespace Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "Submission",
                 columns: new[] { "Id", "Point", "ProblemId", "ProgrammingLanguage", "SubmissionAt", "UserId", "Algorithm", "CleanCode" },
-<<<<<<<< HEAD:ProgressService/Infrastructure/Migrations/20250909192826_init.cs
-                values: new object[] { 1, 9, 1, "c sharp", new DateTime(2025, 9, 10, 2, 28, 25, 375, DateTimeKind.Local).AddTicks(7899), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
-========
-                values: new object[] { 1, 9, 1, "c sharp", new DateTime(2025, 9, 10, 10, 12, 47, 538, DateTimeKind.Local).AddTicks(5051), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
->>>>>>>> implementProcessService:ProgressService/Infrastructure/Migrations/20250910031248_init.cs
+                values: new object[] { 1, 9, 1, "c sharp", new DateTime(2025, 9, 10, 10, 24, 22, 310, DateTimeKind.Local).AddTicks(3347), 2, "Algorithm is correct and efficient for the given task. No issues detected.", "Code is readable and follows basic C++ conventions. Could benefit from comments for clarity." });
 
             migrationBuilder.InsertData(
                 table: "UserProgress",

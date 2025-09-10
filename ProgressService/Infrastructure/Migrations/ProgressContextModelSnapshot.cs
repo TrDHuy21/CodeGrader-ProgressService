@@ -81,7 +81,7 @@ namespace Infrastructure.Migrations
                             Point = 9,
                             ProblemId = 1,
                             ProgrammingLanguage = "c sharp",
-                            SubmissionAt = new DateTime(2025, 9, 10, 10, 12, 47, 538, DateTimeKind.Local).AddTicks(5051),
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 24, 22, 310, DateTimeKind.Local).AddTicks(3347),
                             UserId = 2
                         });
                 });

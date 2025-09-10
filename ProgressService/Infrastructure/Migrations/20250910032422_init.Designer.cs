@@ -12,11 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ProgressContext))]
-<<<<<<<< HEAD:ProgressService/Infrastructure/Migrations/20250909192826_init.Designer.cs
-    [Migration("20250909192826_init")]
-========
-    [Migration("20250910031248_init")]
->>>>>>>> implementProcessService:ProgressService/Infrastructure/Migrations/20250910031248_init.Designer.cs
+    [Migration("20250910032422_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -88,11 +84,7 @@ namespace Infrastructure.Migrations
                             Point = 9,
                             ProblemId = 1,
                             ProgrammingLanguage = "c sharp",
-<<<<<<<< HEAD:ProgressService/Infrastructure/Migrations/20250909192826_init.Designer.cs
-                            SubmissionAt = new DateTime(2025, 9, 10, 2, 28, 25, 375, DateTimeKind.Local).AddTicks(7899),
-========
-                            SubmissionAt = new DateTime(2025, 9, 10, 10, 12, 47, 538, DateTimeKind.Local).AddTicks(5051),
->>>>>>>> implementProcessService:ProgressService/Infrastructure/Migrations/20250910031248_init.Designer.cs
+                            SubmissionAt = new DateTime(2025, 9, 10, 10, 24, 22, 310, DateTimeKind.Local).AddTicks(3347),
                             UserId = 2
                         });
                 });
